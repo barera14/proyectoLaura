@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <title>Convertidor de Tasa!</title>
+  </head>
+  <body>
+		<div class="content">
+    <form id="Formulario">
+	<br>
+	<div class="row">
+		<div class="col-lg-3"></div>
+		<div class="col-lg-6">
+			  <h2>Convertidor de tasas</h2>
+		</div>
+	</div>
+	  <div class="row">
+		<div class="col-lg-3">
+		</div>
+		<div class="col-lg-6">		  
+		  <label for="txtValorTasa">Ingrese valor tasa</label>
+		  <input type="number" class="form-control" id="txtValorTasa" placeholder="Ingrese valor de la tasa">
+		</div>
+	  </div>	
+	  <div class="row">
+		<div class="col-lg-3">
+		</div>
+		<div class="form-group col-md-3">
+		  <label for="TasaOriginal">Seleccione tasa</label>
+		  <select id="TasaOriginal" class="form-control">
+			<option value="0" selected>Seleccione...</option>
+			<option value="Efectiva">Efectiva</option>
+			<option value="Nominal">Nominal</option>
+		  </select>
+		</div>
+		<div class="form-group col-md-3">
+		  <label for="TiempoOriginal">Seleccione tiempo</label>
+		  <select id="TiempoOriginal" class="form-control">
+			<option value="0" selected>Seleccione...</option>
+			<option value="Mensual">Mensual</option>
+			<option value="Bimestral">Bimestral</option>
+			<option value="Trimestral">Trimestral</option>
+			<option value="Semestral">Semestral</option>
+			<option value="Anual">Anual</option>
+		  </select>
+		</div>
+	  </div>
+	  <div class="row">
+		<div class="form-group col-md-3">
+		</div>
+		<div class="form-group col-md-3">
+		  <label for="TasaFinal">Seleccione tasa</label>
+		  <select id="TasaFinal" class="form-control">
+			<option value="0" selected>Seleccione...</option>
+			<option value="Efectiva">Efectiva</option>
+			<option value="Nominal">Nominal</option>
+		  </select>
+		  <br>
+		</div>
+		<div class="form-group col-md-3">
+		  <label for="TiempoFinal">Seleccione tiempo</label>
+		  <select id="TiempoFinal" class="form-control">
+			<option value="0" selected>Seleccione...</option>
+			<option value="Mensual">Mensual</option>
+			<option value="Bimestral">Bimestral</option>
+			<option value="Trimestral">Trimestral</option>
+			<option value="Semestral">Semestral</option>
+			<option value="Anual">Anual</option>
+		  </select>
+		</div>
+		<div class="form-group col-md-2">
+		</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4"></div>
+			<div class="col-lg-2">
+					<button type="button" onclick="CalcularTasa();" class="btn btn-info">Calcular</button>
+			</div>
+			<div class="col-lg-2">
+					<button type="button" onclick="LimpiarFormTasas();" class="btn btn-info">Limpiar</button>
+			</div>
+				
+		</div>
+	  <br>
+	  <br>
+	  <div class="form-row">
+		  <div class="form-group col-md-2">
+		  </div>
+		  <div class="form-group col-md-2">
+			<h4>Pago extraordinario</h4>
+		  </div>
+	  </div>
+	  <div class="form-row">
+		<div class="form-group col-md-2">
+		</div>
+		<div class="form-group col-md-2">
+		<div class="btn-group btn-group-toggle" data-toggle="buttons">
+			<label class="btn btn-info active">
+				<input type="radio" name="options" id="option1" autocomplete="off" checked> Afecta tiempo
+			</label>
+			<label class="btn btn-info">
+				<input type="radio" name="options" id="option2" autocomplete="off"> Afecta cuota
+			</label>
+		</div>	
+		</div>
+	  </div>
+	  <div class="form-row">
+	    <div class="form-group col-md-2">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtValorCapital">Ingrese capital</label>
+			<input type="number" class="form-control" id="txtValorCapital" placeholder="Ingrese capital">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtCantidadTiempo">Ingrese tiempo</label>
+			<input type="number" onChange="CargarSelect();" class="form-control" id="txtCantidadTiempo" placeholder="Ingrese tiempo">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtTasaCredito">Tasa de credito</label>
+			<input type="number" readonly class="form-control" id="txtTasaCredito" placeholder="Tasa de credito">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtValorTiempo">Tiempo</label>
+			<input type="text" readonly class="form-control" id="txtValorTiempo" placeholder="Tiempo">
+		</div>
+	  </div>
+	  <div class="form-row">
+		<div class="form-group col-md-2">
+		</div>	
+        <div class="form-group col-md-2">
+			<label for="txtCuotaInicial">Cuota inicial</label>
+			<input type="number" readonly class="form-control" id="txtCuotaInicial" placeholder="Cuota inicial">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtValorPresente">Valor presente</label>
+			<input type="number" readonly class="form-control" id="txtValorPresente" placeholder="Valor presente">
+		</div>		
+	  </div>
+	  <div class="form-row">
+	    <div class="form-group col-md-2">
+		</div>
+		<div class="form-group col-md-2">
+			<button type="button" onclick="SumarCuota();" class="btn btn-primary">Sumar</button>
+		</div>
+	  </div>
+	  <div class="form-row">
+		<div class="form-group col-md-2">
+		</div>	
+        <div class="form-group col-md-4">
+			<br>
+			<button type="button" onclick="LimpiarPagoUno();" class="btn btn-primary">Limpiar Pago 1</button>
+			<button type="button" onclick="LimpiarPagoDos();" class="btn btn-primary">Limpiar Pago 2</button>
+			<button type="button" onclick="LimpiarPagoTres();" class="btn btn-primary">Limpiar Pago 3</button>
+		</div>			
+	  </div>
+	  <div class="form-row">
+		<div class="form-group col-md-2">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtPagoExt1">Pago extraordinario</label>
+			<input type="number" class="form-control" id="txtPagoExt1" placeholder="Ingrese pago">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="SelectTiempo">Seleccione mes</label>
+			<select id="SelectTiempo1" name="SelectTiempo1" class="form-control">
+				<option value="0" selected>Seleccione...</option>
+			</select>
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtNewTime1">Nuevo tiempo</label>
+			<input type="number" readonly class="form-control" id="txtNewTime1" placeholder="Nuevo tiempo">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtNewCuota1">Nueva cuota</label>
+			<input type="number" readonly class="form-control" id="txtNewCuota1" placeholder="Nueva cuota">
+		</div>
+	  </div>
+	  <div class="form-row">
+		<div class="form-group col-md-2">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtPagoExt2">Pago extraordinario</label>
+			<input type="number" class="form-control" id="txtPagoExt2" placeholder="Ingrese pago">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="SelectTiempo">Seleccione mes</label>
+			<select id="SelectTiempo2" name="SelectTiempo2" class="form-control">
+				<option value="0" selected>Seleccione...</option>
+			</select>
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtNewTime2">Nuevo tiempo</label>
+			<input type="number" readonly class="form-control" id="txtNewTime2" placeholder="Nuevo tiempo">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtNewCuota2">Nueva cuota</label>
+			<input type="number" readonly class="form-control" id="txtNewCuota2" placeholder="Nueva cuota">
+		</div>
+	  </div>
+	  <div class="form-row">
+		<div class="form-group col-md-2">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtPagoExt3">Pago extraordinario</label>
+			<input type="number" class="form-control" id="txtPagoExt3" placeholder="Ingrese pago">
+			<br>
+			<button type="button" onclick="CalcularPagoExtraordinario();" class="btn btn-primary">Calcular</button>
+		    <button type="button" onclick="LimpiarPagoExtraordinario();" class="btn btn-primary">Limpiar</button>
+		</div>
+		<div class="form-group col-md-2">
+			<label for="SelectTiempo3">Seleccione mes</label>
+			<select id="SelectTiempo3" name="SelectTiempo3" class="form-control">
+				<option value="0" selected>Seleccione...</option>
+			</select>
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtNewTime3">Nuevo tiempo</label>
+			<input type="number" readonly class="form-control" id="txtNewTime3" placeholder="Nuevo tiempo">
+		</div>
+		<div class="form-group col-md-2">
+			<label for="txtNewCuota3">Nueva cuota</label>
+			<input type="number" readonly class="form-control" id="txtNewCuota3" placeholder="Nueva cuota">
+		</div>
+	  </div>
+	</form>
+</div>
+
+    
+    <script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/Index.js"></script>
+  </body>
+</html>
